@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--核心配置文件-->
+<configuration>
+    <properties resource="db.properties"/>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <typeAliases>
+        <typeAlias type="com.qin.pojo.Student" alias="Student"/>
+        <typeAlias type="com.qin.pojo.Teacher" alias="Teacher"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- ORM映射文件 -->
+   <mappers>
+<!--       <mapper resource="com.qin.dao/*.xml"/>-->
+       <mapper class="com.qin.dao.TeacherMapper"/>
+       <mapper class="com.qin.dao.StudentMapper"/>
+   </mappers>
+</configuration>
