@@ -17,7 +17,5 @@ public class MyTest {
         TeacherMapper mapper = sqlSession.getMapper(TeacherMapper.class);
         Teacher teacher = mapper.getTeacherByID(1);
         System.out.println("teacher:" + teacher);
-
-
     }
 }

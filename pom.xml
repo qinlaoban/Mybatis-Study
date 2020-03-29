@@ -16,6 +16,8 @@
         <module>Mybatis-05-01</module>
         <module>Mybatis-06</module>
         <module>Mybatis-07</module>
+        <module>Mybatis-08</module>
+        <module>Mytatis-09</module>
     </modules>
 
     <!--    导入依赖-->

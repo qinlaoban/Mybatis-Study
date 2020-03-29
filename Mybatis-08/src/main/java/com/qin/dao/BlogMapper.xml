@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qin.dao.BlogMapper">
+    <update id="updateBlog">
+        update blog set title = #{title}  where id = #{id};
+    </update>
+    <select id="getBlogs"  resultType="Blog">
+        select *from blog;
+    </select>
+
+    <insert id="addBlog" parameterType= "Blog">
+    insert into blog (id,title,author,create_date,views) values (#{id},#{title},#{author},#{createDate},#{views});
+  </insert>
+  <delete id="deleteBolg">
+    DELETE FROM blog where id = 2
+  </delete>
+<!--    条件 if-->
+<!--    <select id="getListBlog" parameterType="map" resultType="com.qin.pojo.Blog">-->
+<!--        select * from blog-->
+<!--        <where>-->
+<!--            <if test="title != null">-->
+<!--                 title = #{title}-->
+<!--            </if>-->
+<!--            <if test="author != null">-->
+<!--                 and author = #{author}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+    <select id="getListBlog" parameterType="map" resultType="Blog">
+        select * from blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    title = #{title}
+                </when>
+                <when test="author != null">
+                    author = #{author}
+                </when>
+                <otherwise>
+                    views = 100
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateBlog1" parameterType="map">
+        update blog
+        <set>
+            <if test="title !=null">
+                title = #{title},
+            </if>
+            <if test="author !=null">
+                author = #{author},
+            </if>
+        </set>
+    where id = #{id}
+    </update>
+</mapper>

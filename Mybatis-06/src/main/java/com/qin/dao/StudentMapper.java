@@ -1,6 +1,7 @@
 package com.qin.dao;
 
 import com.qin.pojo.Student;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface StudentMapper {
     List<Student> getStudents();
     List<Student> getStudents2();
 
-    Student getStudentById(int id,String name);
+    Student getStudentById(@Param("id") int id, String name);
 }

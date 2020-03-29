@@ -3,20 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qin.dao.TeacherMapper">
-    <select id="getTeacherByID" resultMap="t_s">
-        select s.id sid,s.name sname
-                from student s,teacher t
-                where t.id = #{tid}
-                and s.tid = t.id
-    </select>
-    <resultMap id="t_s" type="Teacher">
-       
-        <collection property="students" ofType="Student">
-            <result property="id" column="sid"/>
-            <result property="name" column="sname"/>
-            <result property="tid" column="tid"/>
-        </collection>
-    </resultMap>
+<!--    <select id="getTeacherByID" resultMap="t_s">-->
+<!--        select s.id sid,s.name sname,t.name tname, t.id tid-->
+<!--                from student s,teacher t-->
+<!--                where t.id = #{tid}-->
+<!--                and s.tid = t.id-->
+<!--    </select>-->
+<!--    <resultMap id="t_s" type="Teacher">-->
+<!--        <result property="name" column="tname"/>-->
+<!--        <result property="id" column="tid"/>-->
+<!--        <collection property="students" ofType="Student">-->
+<!--            <result property="id" column="sid"/>-->
+<!--            <result property="name" column="sname"/>-->
+<!--            <result property="tid" column="tid"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
 <!--    错误写法，报错 -->
 <!--    org.apache.ibatis.exceptions.TooManyResultsException:
  Expected one result (or null) to be returned by selectOne(),
@@ -30,4 +31,17 @@
 <!--    <resultMap id="t_s" type="Teacher">-->
 <!--        <collection property="students" ofType="Student"></collection>-->
 <!--    </resultMap>-->
+    <select id="getTeacherByID" resultMap="stu_teacher">
+        select s.id sid,s.name sname,s.tid stid,t.id tid,t.name tname
+        from student s ,teacher t
+        where s.id = t.id and t.id = #{tid};
+    </select>
+    <resultMap id="stu_teacher" type="Teacher">
+        <result column="tname" property="name"/>
+        <result column="tid" property="id"/>
+        <collection property="students" ofType="Student">
+            <result column="sname" property="name"/>
+            <result column="sid" property="id"/>
+        </collection>
+    </resultMap>
 </mapper>

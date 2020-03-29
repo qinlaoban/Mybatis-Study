@@ -22,7 +22,7 @@
     where s.tid = t.id
 </select>
 <resultMap id="stu_teacher" type="Student">
-    <result property="id" column="tid"/>
+    <result property="id" column="sid"/>
     <result property="name" column="sname"/>
     <association property="tid" javaType="Teacher">
         <result property="name" column="tname"/>
@@ -30,6 +30,6 @@
 </resultMap>
 <!--    测试-->
     <select id="getStudentById" resultType="Student">
-        select * from student where id = #{id},name = #{name};
+        select * from student where id = #{id};
     </select>
 </mapper>
